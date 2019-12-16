@@ -2,7 +2,7 @@
          The Surrogate Index: Combining Short-Term Proxies to Estimate
             Long-Term Treatment Effects More Rapidly and Precisely
 ********************************************************************************
-This code reproduces the figures and tables that refer to the GAIN program, 
+This code reproduces the figures and tables that refer to the GAIN program,
 using a simulated dataset.
 
 The code can be run directly from this metafile by setting the global
@@ -16,10 +16,10 @@ clear all
 set more off
 
 * Set global directing to this repository
-global surrogates "[PLEASE INSERT THE FILE DIRECTORY]" // For example: global surrogates "C:\Users\OpportunityInsights\Documents\GitHub\surrogate-index"
+global surrogates "C:\Users\ruschenpohler\Desktop\GitHub\Surrogates-Replication-Code" // For example: global surrogates "C:\Users\OpportunityInsights\Documents\GitHub\surrogate-index"
 
-* Choose between real and simulated data 
-global data_type simulated // change to "real" if using real dataset 
+* Choose between real and simulated data
+global data_type simulated // change to "real" if using real dataset
 
 * Create relevant directories
 cap mkdir "${surrogates}/Data (Derived)"
@@ -34,17 +34,17 @@ global output "${surrogates}/Output"
 /*---------------------------------
       Compute estimates
 ----------------------------------*/
-* Produce experimental, surrogate index, single surrogate and naive estimates of treatment effects 
+* Produce experimental, surrogate index, single surrogate and naive estimates of treatment effects
 do "${code}/compute estimates/Estimate treatment effects (experimental, surrogate index, single surrogate, naive).do"
 
-* Compute confidence intervals 
-	// This .do file produces the confidence intervals referred to in footnote 16. 
-	// As the confidence intervals are produced by bootstrapping, the .do file takes 
-	// rather a long time to run. For this reason, it is commented out of the code. 
+* Compute confidence intervals
+	// This .do file produces the confidence intervals referred to in footnote 16.
+	// As the confidence intervals are produced by bootstrapping, the .do file takes
+	// rather a long time to run. For this reason, it is commented out of the code.
 * do "${code}/compute estimates/Create confidence intervals for bounds for degree of bias.do"
 
 /*---------------------------------
-   Make figures for employment 
+   Make figures for employment
 ----------------------------------*/
 foreach ext in wmf pdf {
 
@@ -71,13 +71,13 @@ foreach ext in wmf pdf {
 	***********************
 	*      Figure 5       *
 	***********************
-	do "${code}/figures/figure 5.do"	
-	
+	do "${code}/figures/figure 5.do"
+
 	***********************
 	*      Figure 6       *
 	***********************
 	do "${code}/figures/figure 6A.do"
-	
+
 	***********************
 	*  Appendix Figure 5  *
 	***********************
@@ -87,14 +87,14 @@ foreach ext in wmf pdf {
 /*---------------------------------
     Make figures for earnings
 ----------------------------------*/
-// Note that the simulated data include employment outcomes only 
+// Note that the simulated data include employment outcomes only
 if "$data_type" == "real" {
 	foreach ext in wmf pdf {
 
 		* Settings for figures
 		global extension "`ext'"
 		global title_size = cond("`ext'"=="pdf","zero","vhuge")
-		
+
 		***********************
 		*      Figure 6       *
 		***********************
